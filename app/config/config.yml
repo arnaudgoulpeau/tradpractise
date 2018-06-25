@@ -4,10 +4,6 @@ imports:
     - { resource: services.yml }
     - { resource: admin.yml }
 
-# Application configuration
-app:
-    constants: "%constants%"
-
 # Project configuration
 #a5sys_project:
 #    i18n_default_locale: fr
