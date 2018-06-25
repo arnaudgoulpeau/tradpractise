@@ -1,0 +1,61 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <form method="POST" action="{{ path("search_practises") }}">
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-md-8">
+                <input class="form-control" name="search" placeholder="{{ 'search.practises.placeholder'|trans }}" value="{{ searchTerm }}">
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" name="tag" placeholder="{{ 'search.practises.tag.placeholder' }}">
+                    <option></option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}" {% if selectedTag == tag.id %}selected{% endif %}>{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search"></i> {{ 'search'|trans }}</button>
+            </div>
+        </div>
+    </form>
+    {% for practiseSession in practiseSessionList %}
+
+    <div class="panel panel-default" onclick="window.location.href='{{ path('seepractise', {id: practiseSession.id}) }}'">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a href="{{ path('seepractise', {id: practiseSession.id}) }}">{{ practiseSession.name }}</a></h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+                {{ 'techniques.count'|trans({'%count%':practiseSession.techniques.count})|raw }}
+            </div>
+            <div class="col-md-6 text-right">
+                <span class="badge">{{ 'warmuptune'|trans }}</span> {{ practiseSession.warmupTune }}{% if is_granted('ROLE_SUPER_ADMIN') and practiseSession.warmupTune.isStared %} <i class="fa fa-star"></i>{% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                {{ 'tunesets.count'|trans({'%count%':practiseSession.tuneSets.count})|raw }}<br/>
+                <ol>
+                {% for tuneSet in practiseSession.tuneSets %}
+                    <li>{{ tuneSet|raw }}</li>
+                {% endfor %}
+                </ol>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+    {% else %}
+
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-md-12">
+                {{ 'no.result'|trans }}
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}

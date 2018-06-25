@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Sans Set</th>
+                <th>Sans Patrition</th>
+                <th>Sans ABC</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tune in tunes %}
+            {% include ":tune:tune_detail_row.html.twig" with {tune: tune} %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,98 @@
+'': ''
+'<aucune>': '<aucune>'
+'Mot de passe': 'Mot de passe'
+'Mot de passe (validation)': 'Mot de passe (validation)'
+
+action:
+    valider: Valider
+
+app:
+    title: 'Trad Practise'
+
+authentication: Authentification
+
+connect_me: 'Se connecter'
+date_format: d/m/Y
+
+login: Identifiant
+logout: 'Se déconnecter'
+
+menu.home: Accueil
+menu.tunes: Titres
+menu.techniques: Techniques
+menu.practises: Entrainements
+menu.admin: Administration
+menu.newtune: Nouveau titre
+menu.playlist: Playlist
+
+PractiseSession: Entrainement
+Tune: Titre
+TuneType: Type de titre
+Technique: Technique
+TechniqueFile: Fichier de technique
+TechniqueFileType: Type de fichier de technique
+TechniqueType: Type de technique
+TuneSet: Jeu
+TuneFile: Fichier de titre
+TuneFileType: Type de fichier de titre
+User: Utilisateur
+Entrainement: Entrainement
+Delete: Supprimer
+
+nameLi: Noms
+Tunes: titres
+
+techniques.count: <span class="badge">%count%</span> technique(s)
+tunesets.count: <span class="badge">%count%</span> jeu(x)
+see.practise: Voir entraînement
+warmuptune: Titre d'échauffement
+
+detail.techniques: Techniques (1/3 du temps)
+detail.practise: Jeux (2/3 du temps)
+detail.exampleLink: lien d'exemple
+detail.set.number: Jeu n°%num%
+detail.back.list: Retour liste entraînements
+detail.thesession.link: Lien The Session
+
+search: Rechercher
+search.practises.placeholder: L'entrainement contient le titre
+search.practises.tag.placeholder: Tag
+search.tunes.placeholder: Le titre contient
+no.result: Aucun résultat
+
+search.techniques.placeholder: La technique contient
+
+stared.tunes: Favoris
+tunes.for.tag: %tag%
+tunes.for.type: %type%
+all.tunes: Tous les titres
+home.title: Recherche
+
+search.by.global: Recherche globale
+search.by.tag: Recherche des titres par Tag
+search.by.type: Recherche des titres par Type
+home.diverse: Divers
+
+all.tags: Tous les tags
+all.types: Tous les types
+
+choice.all.favorites: Favoris ou non
+choice.favorites: Favoris
+choice.non.favorites: Non favoris
+
+warmup.tune: Titre d'échauffement:
+
+export.pdf.alpha: Export PDFs par ordre alpha
+export.pdf.type: Export PDFs par type
+export.pdf.toc.alpha.order: Ordre alpha
+
+tunes.issue: Tunes avec manquement
+
+import.from.mandolin.tab: Import depuis mandolintab
+clear.cache: Vider le cache
+
+technique.link.example: Lien d'exemple
+
+all.techniques: Toutes les techniques
+
+abc.and.sheet.music: ABC et partition liée

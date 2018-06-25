@@ -1,0 +1,50 @@
+<h4>{% if isWarmup is defined and isWarmup %}{{ 'warmup.tune'|trans }} {% endif %}{{ tune.name }}{% if is_granted('ROLE_SUPER_ADMIN') and tune.isStared %} <i class="fa fa-star"></i>{% endif %}</h4>
+<span style="margin-bottom: 5px;display: inline-block;"><span class="label label-default">{{ tune.key }}</span></span>
+<span style="margin-bottom: 5px;display: inline-block;"><a class="label label-success" href="{{ path('search_tunes', {'type': tune.tuneType.id}) }}">{{ tune.tuneType.name }}</a></span>
+{% for tag in tune.tags %}
+    <span style="margin-bottom: 5px;display: inline-block;"><a class="label label-info" href="{{ path('search_tunes', {'tag': tag.id}) }}">{{ tag.name }}</a></span>
+{% endfor %}
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="row">
+            {% if tune.linkTheSession %}
+            <div class="col-md-4 text-center btn-holder">
+                <a target="_blank" href="{{ tune.linkTheSession }}" class="btn btn-default the-session-btn"><img src="{{ asset('images/thesession.ico') }}" style="width: 32px"> {{ 'detail.thesession.link'|trans }}</a>
+            </div>
+            {% endif %}
+            {% for tuneFile in tune.tuneFiles %}
+                <div class="col-md-4 text-center btn-holder">
+                    {% if tuneFile.link %}
+                    <a target="_blank" href="{{ tuneFile.link }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ tuneFile.tuneFileType.fileName }}"> {{ tuneFile.name }}</a>
+                    {% else %}
+                        {% set ext = tuneFile.fileName|slice(-3, 3) %}
+                        {% if ext == 'mp3' %}
+                            <div style="display: inline-block; border: 1px solid #ccc; border-radius: 5px;">{{ tuneFile.name }}<br>
+                            <audio controls="controls" loop>
+                                <source src="{{ tunefilepath }}/{{ tuneFile.fileName }}" type="audio/mp3" />
+                                <a target="_blank" href="{{ tunefilepath }}/{{ tuneFile.fileName }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ tuneFile.tuneFileType.fileName }}"> {{ tuneFile.name }}</a>
+                            </audio></div>
+                        {% else %}
+                            <a target="_blank" href="{{ tunefilepath }}/{{ tuneFile.fileName }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ tuneFile.tuneFileType.fileName }}"> {{ tuneFile.name }}</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor%}
+            {% if tune.abc %}
+                <div class="col-md-12">
+                    <button onclick="genAbc({{tune.id}});" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#abc{{tune.id}}" aria-expanded="false" aria-controls="abc{{tune.id}}">
+                        {{ 'abc.and.sheet.music'|trans }}
+                    </button>
+                    <div class="collapse" id="abc{{tune.id}}">
+                        <div id="abctext{{tune.id}}">
+                            {{ tune.abc|nl2br }}
+                        </div>
+                        <div id="abcsheet{{tune.id}}"></div>
+                        <div id="abcmidi{{tune.id}}"></div>
+                    </div>
+
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

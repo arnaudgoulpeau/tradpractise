@@ -1,0 +1,35 @@
+<h4>{{ technique.name }}</h4>
+
+<span style="margin-bottom: 5px;display: inline-block;"><a class="label label-success" href="{{ path('search_techniques', {'type': technique.techniqueType.id}) }}">{{ technique.techniqueType.name }}</a></span>
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        <div class="row">
+
+            <div class="col-md-12">
+                <a target="_blank" href="{{ technique.exampleLink }}" class="btn btn-info">{{ 'technique.link.example'|trans }}</a><br>
+
+                {{ technique.description|nl2br }}<br>
+            </div>
+
+            {% for techniqueFile in technique.techniqueFiles %}
+                <div class="col-md-4 text-center btn-holder">
+                    {% if techniqueFile.link %}
+                    <a target="_blank" href="{{ techniqueFile.link }}" class="btn btn-info"> {{ techniqueFile.name }}</a>
+                    {% else %}
+                        {% set ext = techniqueFile.fileName|slice(-3, 3) %}
+                        {% if ext == 'mp3' %}
+                            <div style="display: inline-block; border: 1px solid #ccc; border-radius: 5px;">{{ techniqueFile.name }}<br>
+                            <audio controls="controls" loop>
+                                <source src="{{ tunefilepath }}/{{ techniqueFile.fileName }}" type="audio/mp3" />
+                                <a target="_blank" href="{{ tunefilepath }}/{{ techniqueFile.fileName }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ techniqueFile.techniqueFileType.fileName }}"> {{ techniqueFile.name }}</a>
+                            </audio></div>
+                        {% else %}
+                            <a target="_blank" href="{{ tunefilepath }}/{{ techniqueFile.fileName }}" class="btn btn-info">{{ techniqueFile.name }}</a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            {% endfor%}
+        </div>
+    </div>
+</div>

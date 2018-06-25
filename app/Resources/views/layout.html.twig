@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+  {{ parent() }}
+  {% if not tab_active is defined %}
+    {% set tab_active = 'accueil' %}
+  {% endif %}
+  <div class="page-header" style="padding-bottom: 0px; border-bottom: none; margin-top: 0px;">
+
+    <div class="container-fluid">
+        <div class="row">
+        {#<nav class="navbar navbar-default navbar-fixed-top">#}
+          <div class="navbar_menu">
+            <div class="navbar navbar-default navbar-static-top" role="navigation">
+              <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                  <ul class="nav navbar-nav">
+
+                    <li {% if app.request.get( '_route') == 'home' %} class="active" {% endif %}>
+                        <a href="{{ path('home') }}"><h4><i class="fa fa-fw fa-home"></i> {{ 'menu.home'|trans }}</h4></a>
+                    </li>
+                    <li {% if app.request.get( '_route') == 'search_tunes' %} class="active" {% endif %}>
+                        <a href="{{ path('search_tunes') }}"><h4><i class="fa fa-fw fa-music"></i> {{ 'menu.tunes'|trans }}</h4></a>
+                    </li>
+                    <li {% if app.request.get( '_route') == 'search_techniques' %} class="active" {% endif %}>
+                        <a href="{{ path('search_techniques') }}"><h4><i class="fa fa-fw fa-fast-forward"></i> {{ 'menu.techniques'|trans }}</h4></a>
+                    </li>
+                    <li {% if app.request.get( '_route') == 'search_practises' %} class="active" {% endif %}>
+                        <a href="{{ path('search_practises') }}"><h4><i class="fa fa-fw fa-play"></i> {{ 'menu.practises'|trans }}</h4></a>
+                    </li>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li>
+                        <a href="{{ path('admin') }}"><h4><i class="fa fa-fw fa-cog"></i> {{ 'menu.admin'|trans }}</h4></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('newtune') }}"><h4><i class="fa fa-fw fa-bookmark"></i> {{ 'menu.newtune'|trans }}</h4></a>
+                    </li>
+                    {% endif %}
+                    <li {% if app.request.get( '_route') == 'playlist' %} class="active" {% endif %}>
+                      <a href="{{ path('playlist') }}"><h4><i class="fa fa-fw fa-play"></i> {{ 'menu.playlist'|trans }}</h4></a>
+                    </li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('fos_user_security_logout') }}"><h4><i class="fa fa-fw fa-user"></i></span> {{ 'logout'|trans }}</h4></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+{% endblock %}
+
+{% block body %}
+  {{ parent() }}
+
+  <div class="container-fluid main">
+
+    {# Show flashes if any #}
+    {% if app.session.flashbag.has('error') %}
+    <div class="alert alert-layout alert-danger">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            {{ flashMessage|raw }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if app.session.flashbag.has('warning') %}
+    <div class="alert alert-layout alert-warning">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for flashMessage in app.session.flashbag.get('warning') %}
+            {{ flashMessage|raw }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if app.session.flashbag.has('success') %}
+    <div class="alert alert-layout alert-success">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            {{ flashMessage|raw }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% if app.session.flashbag.has('info') %}
+    {% set flashInfo = 1 %}
+    <div class="alert alert-layout alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        {% for flashMessage in app.session.flashbag.get('info') %}
+            {{ flashMessage|raw }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+	<div id="dialog-message" title="Avertissement" style="display: none;">
+	  <p>
+		<span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 70px 0;"></span>
+		<div id="custom-message"></div>
+	  </p>
+	  <p>
+	  </p>
+	</div>
+
+    <div class="container">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('assets/vendor/bower-asset/jquery/dist/jquery.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/bower-asset/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/bower-asset/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js') }}"></script>
+  <script src="{{ asset('assets/vendor/bower-asset/bootstrap-switch/dist/js/bootstrap-switch.min.js') }}"></script>
+{% endblock %}

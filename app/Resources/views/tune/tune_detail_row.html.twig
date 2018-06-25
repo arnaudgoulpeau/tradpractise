@@ -1,0 +1,16 @@
+{% if not tune.hasTuneSet() or not tune.hasPartition() %}
+<tr>
+    <td>
+        {{ tune.name }}
+    </td>
+    <td>
+        {% if not tune.hasTuneSet() %} <i class="fa fa-bug"></i>  <a href="{{ path('admin', {'action': 'new', 'entity': 'TuneSet'}) }}">Créer un Set</a>{% endif %}
+    </td>
+    <td>
+        {% if not tune.hasPartition() %} <i class="fa fa-bug"></i> <a href="{{ path('admin', {'action': 'new', 'entity': 'TuneFile'}) }}">Créer un fichier</a>{% endif %}
+    </td>
+    <td>
+        {% if not tune.getAbc() %} <i class="fa fa-bug"></i> {% if tune.linkTheSession is not null %}<a href="{{ path('admin', {'action': 'getAbc', 'entity': 'Tune', 'id': tune.id}) }}">Get ABC</a>{% else %}Pas de lien thesession...{% endif %}{% endif %}
+    </td>
+</tr>
+{% endif %}

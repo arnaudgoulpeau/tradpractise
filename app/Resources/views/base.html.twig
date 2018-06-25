@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  		<meta name="viewport" content="width=device-width, initial-scale=1">
+  		<title>{% block title %}{{ 'app.title'|trans }}{% endblock %}</title>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+         {% block css %}
+          <link rel="stylesheet" href="{{ asset('assets/vendor/bower-asset/bootstrap/dist/css/bootstrap.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('assets/vendor/bower-asset/seiyria-bootstrap-slider/dist/css/bootstrap-slider.css') }}" type="text/css" />
+          <link rel="stylesheet" href="{{ asset('assets/vendor/bower-asset/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css') }}" type="text/css" />
+          <link rel="stylesheet" href="{{ asset('assets/vendor/bower-asset/fontawesome/css/font-awesome.min.css') }}">
+          <link rel="stylesheet" href="{{ asset('css/tradpractise.css') }}" type="text/css" />
+          {% endblock %}
+          {% block javascripts %}
+          {% endblock%}
+    </head>
+    <body>
+        {% block menu %}{% endblock %}
+        {% block body %}{% endblock %}
+    </body>
+</html>

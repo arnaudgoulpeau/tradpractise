@@ -1,0 +1,101 @@
+{
+	"name" : "adeniaux/kitfiscal",
+	"license" : "proprietary",
+	"type" : "project",
+	"autoload" : {
+		"psr-0" : {
+			"" : "src/",
+			"SymfonyStandard" : "app/"
+		},
+		"psr-4" : {
+			"" : "src/",
+			"SymfonyStandard\\" : "app/SymfonyStandard/"
+		}
+	},
+	"require" : {
+		"php" : ">=5.6",
+		"symfony/symfony" : "2.8.*",
+		"doctrine/orm" : "~2.2,>=2.2.3,<2.5",
+		"doctrine/dbal" : "<2.5",
+		"doctrine/doctrine-bundle" : "~1.4",
+		"doctrine/data-fixtures" : "^1.1",
+		"doctrine/doctrine-fixtures-bundle" : "^2.2",
+		"symfony/assetic-bundle" : "~2.3",
+		"symfony/swiftmailer-bundle" : "~2.3",
+		"symfony/monolog-bundle" : "~2.4",
+		"sensio/distribution-bundle" : "~4.0",
+		"sensio/framework-extra-bundle" : "~3.0,>=3.0.2",
+		"incenteev/composer-parameter-handler" : "~2.0",
+		"friendsofsymfony/jsrouting-bundle" : "^1.5",
+		"willdurand/js-translation-bundle" : "^2.2",
+		"mikehaertl/phpwkhtmltopdf" : "^2.1",
+		"friendsofsymfony/user-bundle" : "~2.0@dev",
+		"tbn/json-annotation-bundle" : "^1.2",
+		"a5sys/overlay-bundle" : "dev-master",
+		"stof/doctrine-extensions-bundle" : "^1.1",
+		"bower-asset/select2" : "^4.0",
+		"bower-asset/humane" : "^3.2",
+		"bower-asset/jquery-loading" : "^1.1",
+		"bower-asset/fontawesome" : "^4.4",
+		"bower-asset/bootstrap-switch" : "^3.3",
+		"bower-asset/jquery-ui" : "^1.11",
+		"bower-asset/seiyria-bootstrap-slider" : "^5.0",
+		"bower-asset/bootstrap" : "^3.3",
+		"vich/uploader-bundle": "~1.7.1",
+		"lrotherfield/form": "^1.1",
+		"javiereguiluz/easyadmin-bundle": "^1.11",
+		"guzzlehttp/guzzle": "^6.2",
+		"liuggio/excelbundle": "^2.1"
+	},
+	"require-dev" : {
+		"sensio/generator-bundle" : "~2.3",
+		"phpunit/phpunit" : "^4.8",
+		"behat/behat" : "^3.0",
+		"behat/symfony2-extension" : "^2.0",
+		"behat/mink-selenium2-driver" : "^1.2",
+		"behat/mink-extension" : "^2.0",
+		"behat/common-contexts" : "^1.2",
+		"a5sys/mink-context" : "dev-master"
+	},
+	"scripts" : {
+		"post-install-cmd" : [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+		],
+		"post-update-cmd" : [
+			"Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+			"Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+		]
+	},
+	"config" : {
+		"bin-dir" : "bin"
+	},
+	"extra" : {
+		"symfony-app-dir" : "app",
+		"symfony-web-dir" : "web",
+		"symfony-assets-install" : "relative",
+		"incenteev-parameters" : {
+			"file" : "app/config/parameters.yml"
+		},
+		"asset-installer-paths" : {
+			"npm-asset-library" : "web/assets/vendor",
+			"bower-asset-library" : "web/assets/vendor"
+		},
+		"asset-optimize-with-installed-packages": false
+	},
+	"repositories" : [{
+			"type" : "vcs",
+			"url" : "git@github.com:thomasbeaujean/EasyAdminBundle.git"
+		}
+	]
+}

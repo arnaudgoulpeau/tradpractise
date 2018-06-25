@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'search.by.global'|trans }}</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row" style="padding-top: 10px">
+            <div class="col-md-3 text-center"><a class="btn btn-default" style="width: 100%;" href="{{ path('search_tunes', {}) }}">{{ 'all.tunes'|trans }}</a></div>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <div class="col-md-3 text-center"><a class="btn btn-default" style="width: 100%;" href="{{ path('search_tunes', {stared: 1}) }}"><i class="fa fa-star"></i> {{ 'stared.tunes'|trans }}</a></div>
+            {% endif %}
+            <div class="col-md-3 text-center"><a class="btn btn-default" style="width: 100%;" href="{{ path('search_techniques', {}) }}">{{ 'all.techniques'|trans }}</a></div>
+          </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'search.by.tag'|trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row" style="padding-top: 10px">
+            {% for tag in tags %}
+              <div class="col-md-3 text-center" {% if loop.index > 4 %}style="margin-top: 10px"{% endif %}><a class="btn btn-default" style="width: 100%;" href="{{ path('search_tunes', {tag: tag.id}) }}">{{ 'tunes.for.tag'|trans({"%tag%": tag.name}) }}</a></div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'search.by.type'|trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row" style="padding-top: 10px">
+            {% for type in types %}
+              <div class="col-md-3 text-center" {% if loop.index > 4 %}style="margin-top: 10px"{% endif %}><a class="btn btn-default" style="width: 100%;" href="{{ path('search_tunes', {type: type.id}) }}">{{ 'tunes.for.type'|trans({"%type%": type.name}) }}</a></div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'home.diverse'|trans }}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row" style="padding-top: 10px">
+              <div class="col-md-4 text-center"><a class="btn btn-default" style="width: 100%;" href="{{ path('export_pdf_tunes', {'order': 'alpha'}) }}">{{ 'export.pdf.alpha'|trans }}</a></div>
+              <div class="col-md-4 text-center"><a class="btn btn-default" style="width: 100%;" href="{{ path('tunes_issue') }}">{{ 'tunes.issue'|trans }}</a></div>
+              <div class="col-md-4 text-center"><a class="btn btn-default" style="width: 100%;" target="_blank" href="{{ path('importfrommandolintab') }}">{{ 'import.from.mandolin.tab'|trans }}</a></div>
+              <div class="col-md-4 text-center"><a class="btn btn-default" style="width: 100%;" target="_blank" href="{{ path('cacheclear') }}">{{ 'clear.cache'|trans }}</a></div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+{% endblock %}

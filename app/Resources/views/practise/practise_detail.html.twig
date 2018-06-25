@@ -1,0 +1,86 @@
+{% extends 'layout.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/abcjs_basic_midi_3.2.1-min.js') }}"></script>
+<script>
+    window.ABCJS.midi.soundfontUrl = "{{ asset('js/soundfont/') }}
+    function genAbc(tuneId) {
+        ABCJS.renderAbc('abcsheet'+tuneId, $('#abctext'+tuneId).text(), {}, {'responsive': 'resize'});
+        ABCJS.renderMidi('abcmidi'+tuneId, $('#abctext'+tuneId).text(), {}, {'generateInline': true}, {});
+    }
+</script>
+{% endblock %}
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/abcjs-midi.css') }}" media="all" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <h1>{{ practiseSession.name }}</h1>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ 'detail.techniques'|trans }}</h2>
+        </div>
+        <div class="panel-body">
+            {% for technique in practiseSession.techniques %}
+                <h4>{{ technique.name }}</h4>
+
+                {% if technique.exampleLink or technique.techniqueFiles.count > 0 %}
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="row">
+                        {% if technique.exampleLink %}
+                            <div class="col-md-4 text-center btn-holder">
+                                <a target="_blank" href="{{ technique.exampleLink }}" class="btn btn-default">{{ 'detail.exampleLink'|trans }}</a>
+                            </div>
+                        {% endif %}
+                        {% for techniqueFile in technique.techniqueFiles %}
+                            <div class="col-md-4 text-center btn-holder">
+                                {% if techniqueFile.link %}
+                                <a target="_blank" href="{{ techniqueFile.link }}" class="btn btn-info">{{ techniqueFile.name }}</a>
+                                {% else %}
+                                <a target="_blank" href="{{ tunefilepath }}/{{ techniqueFile.fileName }}" class="btn btn-info">{{ techniqueFile.name }}</a>
+                                {% endif %}
+                            </div>
+                        {% endfor%}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">{{ 'detail.practise'|trans }}</h2>
+        </div>
+        <div class="panel-body">
+            {% include ":tune:tune_detail.html.twig" with {tune: practiseSession.warmupTune, isWarmup: true} %}
+
+            {% for set in practiseSession.tuneSets %}
+                <hr>
+                <h3>{{ 'detail.set.number'|trans({'%num%': loop.index}) }}</h3>
+
+                {% if set.tune1 is not null %}
+                    {% include ":tune:tune_detail.html.twig" with {tune: set.tune1} %}
+                {% endif %}
+                {% if set.tune2 is not null %}
+                    {% include ":tune:tune_detail.html.twig" with {tune: set.tune2} %}
+                {% endif %}
+                {% if set.tune3 is not null %}
+                    {% include ":tune:tune_detail.html.twig" with {tune: set.tune3} %}
+                {% endif %}
+                {% if set.tune4 is not null %}
+                    {% include ":tune:tune_detail.html.twig" with {tune: set.tune4} %}
+                {% endif %}
+                {% if set.tune5 is not null %}
+                    {% include ":tune:tune_detail.html.twig" with {tune: set.tune5} %}
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="{{ path('search_practises') }}">{{ 'detail.back.list'|trans }}</a>
+{% endblock %}

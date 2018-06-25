@@ -1,0 +1,33 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    lrotherfield.form.type.hidden_entity:
+        class: Lrotherfield\Component\Form\Type\HiddenEntityType
+        arguments:
+            - @doctrine.orm.entity_manager
+        tags:
+            - { name: form.type, alias: hidden_entity }
+    # Base service with default arguments
+    tradpractise.base_service:
+        abstract: true
+        arguments:
+            - @doctrine.orm.entity_manager
+            - @security.context
+            - @translator
+            - @validator
+            - %security.role_hierarchy.roles%
+            - %app.path.root_path%
+            - %app.path.tune_file_path%
+    # service des tunes
+    tradpractise.export_pdf_service:
+        class: AppBundle\Service\ExportPdfService
+        parent: tradpractise.base_service
+#        calls:
+#            - [setTemplating, [@templating]]
+
+    tradpractise.the_session_info_service:
+        class: AppBundle\Service\TheSessionInfoService
+        parent: tradpractise.base_service

@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<form method="GET" action="{{ path("search_techniques") }}">
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col-md-4">
+            <input class="form-control" name="search" placeholder="{{ 'search.techniques.placeholder'|trans }}" value="{{ searchTerm }}">
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" name="type">
+                <option value="">{{ 'all.types'|trans }}</option>
+                {% for type in types %}
+                    <option value="{{ type.id }}" {% if selectedType == type.id %}selected{% endif %}>{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search"></i> {{ 'search'|trans }}</button>
+        </div>
+    </div>
+</form>
+
+{% for technique in techniques %}
+    {% include ":technique:technique_detail.html.twig" with {technique: technique} %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+{% block javascripts %}
+{{ parent() }}
+<script src="{{ asset('js/abcjs_basic_midi_3.2.1-min.js') }}"></script>
+<script>
+    window.ABCJS.midi.soundfontUrl = "{{ asset('js/soundfont/') }};
+    function genAbc(tuneId) {
+        ABCJS.renderAbc('abcsheet'+tuneId, $('#abctext'+tuneId).text(), {}, {'responsive': 'resize'});
+        ABCJS.renderMidi('abcmidi'+tuneId, $('#abctext'+tuneId).text(), {}, {'generateInline': true}, {});
+    }
+</script>
+{% endblock %}
+{% block css %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/abcjs-midi.css') }}" media="all" type="text/css" />
+{% endblock %}
+{% block content %}
+<form method="GET" action="{{ path("search_tunes") }}">
+    <div class="row" style="margin-bottom: 10px">
+        <div class="col-md-4">
+            <input class="form-control" name="search" placeholder="{{ 'search.tunes.placeholder'|trans }}" value="{{ searchTerm }}">
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" name="tag">
+                <option value="">{{ 'all.tags'|trans }}</option>
+                {% for tag in tags %}
+                    <option value="{{ tag.id }}" {% if selectedTag == tag.id %}selected{% endif %}>{{ tag.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" name="type">
+                <option value="">{{ 'all.types'|trans }}</option>
+                {% for type in types %}
+                    <option value="{{ type.id }}" {% if selectedType == type.id %}selected{% endif %}>{{ type.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="col-md-2">
+            <select class="form-control" name="stared">
+                <option value="" {% if stared == "" %}selected{% endif %}>{{ 'choice.all.favorites'|trans }}</option>
+                <option value="1" {% if stared == "1" %}selected{% endif %}>{{ 'choice.favorites'|trans }}</option>
+                <option value="0" {% if stared == "0" %}selected{% endif %}>{{ 'choice.non.favorites'|trans }}</option>
+            </select>
+        </div>
+        {% endif %}
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-default pull-right"><i class="fa fa-search"></i> {{ 'search'|trans }}</button>
+        </div>
+    </div>
+</form>
+
+{% for tune in tunes %}
+    {% include ":tune:tune_detail.html.twig" with {tune: tune} %}
+{% endfor %}
+{% endblock %}

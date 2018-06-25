@@ -1,0 +1,52 @@
+'Les mots de passe doivent correspondre': 'Les mots de passe doivent correspondre'
+
+User:
+    validation:
+        password:
+            not_blank: User.validation.password.not_blank
+
+fos_user:
+    email:
+        already_used: fos_user.email.already_used
+        blank: fos_user.email.blank
+        invalid: fos_user.email.invalid
+        long: fos_user.email.long
+        short: fos_user.email.short
+
+    password:
+        blank: fos_user.password.blank
+        short: fos_user.password.short
+
+    username:
+        already_used: fos_user.username.already_used
+        blank: fos_user.username.blank
+        long: fos_user.username.long
+        short: fos_user.username.short
+
+kitfiscal:
+    client:
+        adresse:
+            obligatoire: 'L''adresse est obligatoire'
+
+        codepostal:
+            obligatoire: 'Le code postal est obligatoire'
+
+        nom:
+            sans:
+                prenom: 'Le prénom est obligatoire lorsqu''un nom est saisi'
+
+        prenom:
+            sans:
+                nom: 'Le nom est obligatoire lorsqu''un prénom est saisi'
+
+        raisonsociale:
+            obligatoire: 'La raison sociale est obligatoire'
+
+        saisie:
+            nom:
+                info:
+                    manquante: 'Saisir, soit nom et prénom, soit raison sociale'
+                    superflue: 'Saisir, soit nom et prénom, soit raison sociale'
+
+        ville:
+            obligatoire: 'La ville est obligatoire'
