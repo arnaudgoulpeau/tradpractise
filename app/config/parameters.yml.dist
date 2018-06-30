@@ -10,6 +10,7 @@ parameters:
     mailer_user: null
     mailer_password: null
     secret: secret
-    app.path.tune_file_path: /pathtostortunes
-    app.path.export_mp3_path: /path_where_mp3_are_stored_when_export
-    app.path.root_path: /root_path_of_the_tradpractise_folder
+    app.path.tune_file_path: /web/tunefiles
+    app.path.export_mp3_path: /web/exportmp3
+    app.path.root_path: /var/www/tradpraxtise/web
+    app.upload.destination: %kernel.root_dir%/../web/tunefiles
