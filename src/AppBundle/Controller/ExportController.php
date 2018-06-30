@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Service\ExportPdfService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +16,20 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 class ExportController extends Controller
 {
     /**
+     * @var ExportPdfService
+     */
+    private $exportPdfService;
+
+    /**
+     * ExportController constructor.
+     * @param ExportPdfService $exportPdfService
+     */
+    public function __construct(ExportPdfService $exportPdfService)
+    {
+        $this->exportPdfService = $exportPdfService;
+    }
+
+    /**
      * @param Request $request
      *
      * @return Response
@@ -22,7 +37,7 @@ class ExportController extends Controller
      */
     public function exportPdfTunesAction(Request $request, $order)
     {
-        $mergedPath = $this->get('tradpractise.export_pdf_service')->exportTunesPdf($order);
+        $mergedPath = $this->exportPdfService->exportTunesPdf($order);
 
         $response = new BinaryFileResponse($mergedPath);
 

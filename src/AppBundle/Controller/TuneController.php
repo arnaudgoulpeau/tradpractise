@@ -2,19 +2,31 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Service\TheSessionInfoService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\BufferedOutput;
 
 /**
  * Classe controlleur pour gérer les tunes.
  */
 class TuneController extends Controller
 {
+    /**
+     * @var TheSessionInfoService
+     */
+    private $theSessionInfoService;
+
+    /**
+     * AdminController constructor.
+     * @param TheSessionInfoService $theSessionInfoService
+     */
+    public function __construct(TheSessionInfoService $theSessionInfoService)
+    {
+        $this->theSessionInfoService = $theSessionInfoService;
+    }
+
     /**
      * @param Request $request
      *
@@ -61,7 +73,7 @@ class TuneController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $tune = $form->getData();
 
-            $tune = $this->get('tradpractise.the_session_info_service')->updateTuneWithTheSessionInfos($tune);
+            $tune = $this->theSessionInfoService->updateTuneWithTheSessionInfos($tune);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($tune);
