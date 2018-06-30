@@ -9,6 +9,9 @@ Associate a tune with files :
 - MP3
 - Youtube, Dailymotion, other web link
 - Partition file
+
+Tag the tunes
+
 Arrange tunes in set, up to 5 tunes in a set
 
 Create technics, the same way as tunes
@@ -21,8 +24,8 @@ Export all your mp3 in a specified folder (stays on server)
 
 # Technical details :
 
-Front end (Twig) to browse practise, tunes, technics
-Admin Backend (EasyAdmin) to manage entities
+- Front end (Twig) to browse practise, tunes, technics
+- Admin Backend (EasyAdmin) to manage entities
 
 No data provider, it's up to you to fill your DB since mp3 tunes could be under license.
 
