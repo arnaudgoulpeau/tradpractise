@@ -3,20 +3,60 @@
 namespace AppBundle\Service;
 
 use AppBundle\Entity\TuneFileType;
+use AppBundle\Service\Traits\GetRepoTrait;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * export pdf service
  */
-class ExportPdfService extends AbstractBaseService
+class ExportPdfService
 {
+    use GetRepoTrait;
+
     const GHOSTSCRIPT_EXECUTABLE = '/opt/bin/gs';
     const ORDER_ALPHA = 'alpha';
     const ORDER_TYPE = 'type';
 
     /**
-     * export des fichiers pdf en un seul
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var string
+     */
+    private $rootPath;
+
+    /**
+     * @var string
+     */
+    private $tuneFilesPath;
+
+    /**
+     * ExportPdfService constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param TranslatorInterface $translator
+     * @param string $rootPath
+     * @param string $tuneFilesPath
+     */
+    public function __construct(EntityManagerInterface $entityManager, TranslatorInterface $translator, string $rootPath, string $tuneFilesPath)
+    {
+        $this->entityManager = $entityManager;
+        $this->translator = $translator;
+        $this->rootPath = $rootPath;
+        $this->tuneFilesPath = $tuneFilesPath;
+    }
+
+    /**
+     * export pdf pdf files in one
      * @param string $order
      * @return string
      */
@@ -50,7 +90,7 @@ class ExportPdfService extends AbstractBaseService
                     'pageNumber' => $counter + $nbPages,
                 );
 
-                // pour avoir le décalage nécessaire sur pageNumber
+                // To get necessary shift on pageNumber
                 $nbPages += $nbPagesCourant;
             }
         }

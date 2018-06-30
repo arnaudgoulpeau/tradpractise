@@ -7,10 +7,10 @@ use Symfony\Component\DomCrawler\Crawler;
 /**
  * get infos from thesession.org service
  */
-class TheSessionInfoService extends AbstractBaseService
+class TheSessionInfoService
 {
     /**
-     * MAJ de la Tune avec les infos de thesession.org
+     * update Tune with infos from thesession.org
      * @param \AppBundle\Entity\Tune $tune
      * @return \AppBundle\Entity\Tune
      */

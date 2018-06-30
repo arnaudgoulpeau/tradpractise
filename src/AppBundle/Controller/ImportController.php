@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Classe controlleur pour gérer les imports.
@@ -17,12 +18,11 @@ class ImportController extends Controller
 {
     /**
      * @Route("/importfrommandolintab", name="importfrommandolintab")
-     * @param type $messages
+     * @param KernelInterface $kernel
      * @return Response
      */
-    public function importFromMandolinTabAction($messages = 10)
+    public function importFromMandolinTabAction(KernelInterface $kernel)
     {
-        $kernel = $this->get('kernel');
         $application = new Application($kernel);
         $application->setAutoExit(false);
 

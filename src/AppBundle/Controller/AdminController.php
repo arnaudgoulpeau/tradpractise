@@ -1,14 +1,28 @@
 <?php
 namespace AppBundle\Controller;
 
-use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
-use Symfony\Component\DomCrawler\Crawler;
+use AppBundle\Service\TheSessionInfoService;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
 /**
  *
  */
 class AdminController extends BaseAdminController
 {
+    /**
+     * @var TheSessionInfoService
+     */
+    private $theSessionInfoService;
+
+    /**
+     * AdminController constructor.
+     * @param TheSessionInfoService $theSessionInfoService
+     */
+    public function __construct(TheSessionInfoService $theSessionInfoService)
+    {
+        $this->theSessionInfoService = $theSessionInfoService;
+    }
+
     /**
      * Récupérer l'ABC sur theSession.org
      * @return Response
@@ -19,7 +33,7 @@ class AdminController extends BaseAdminController
         $id = $this->request->query->get('id');
         $tune = $this->em->getRepository('AppBundle:Tune')->find($id);
 
-        $tune = $this->get('tradpractise.the_session_info_service')->updateTuneWithTheSessionInfos($tune);
+        $this->theSessionInfoService->updateTuneWithTheSessionInfos($tune);
 
         $this->em->flush();
 

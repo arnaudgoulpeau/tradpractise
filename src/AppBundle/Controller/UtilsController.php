@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Classe controlleur pour gérer les utilitaires.
@@ -17,12 +18,11 @@ class UtilsController extends Controller
 {
     /**
      * @Route("/clearcache", name="cacheclear")
-     * @param type $messages
+     * @param KernelInterface $kernelInterface
      * @return Response
      */
-    public function clearcacheAction($messages = 10)
+    public function clearcacheAction(KernelInterface $kernel)
     {
-        $kernel = $this->get('kernel');
         $application = new Application($kernel);
         $application->setAutoExit(false);
 
