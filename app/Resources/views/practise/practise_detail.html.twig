@@ -3,7 +3,7 @@
 {{ parent() }}
 <script src="{{ asset('js/abcjs_basic_midi_3.2.1-min.js') }}"></script>
 <script>
-    window.ABCJS.midi.soundfontUrl = "{{ asset('js/soundfont/') }}
+    window.ABCJS.midi.soundfontUrl = "{{ asset('js/soundfont/') }}";
     function genAbc(tuneId) {
         ABCJS.renderAbc('abcsheet'+tuneId, $('#abctext'+tuneId).text(), {}, {'responsive': 'resize'});
         ABCJS.renderMidi('abcmidi'+tuneId, $('#abctext'+tuneId).text(), {}, {'generateInline': true}, {});
