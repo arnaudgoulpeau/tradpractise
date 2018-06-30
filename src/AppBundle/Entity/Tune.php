@@ -33,7 +33,7 @@ class Tune
     private $tuneFiles;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TuneType", inversedBy="tune")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TuneType", inversedBy="tunes")
      * @ORM\JoinColumn(name="tune_type_id", referencedColumnName="id", nullable=false)
      * @Assert\NotNull()
      */
@@ -80,7 +80,7 @@ class Tune
     private $tuneSets5;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag", inversedBy="tunes")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tag")
      * @ORM\JoinTable(name="tune_tag",
      *      joinColumns={@ORM\JoinColumn(name="tune_id", referencedColumnName="id", onDelete="cascade")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="cascade")}
@@ -94,7 +94,6 @@ class Tune
     public function __construct()
     {
         $this->tuneFiles = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tuneSets = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->tuneSets1 = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tuneSets2 = new \Doctrine\Common\Collections\ArrayCollection();
