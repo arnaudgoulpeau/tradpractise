@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 /**
  *
@@ -23,10 +25,10 @@ class TuneType extends AbstractType
             ->add('linkTheSession')
             ->add('isStared')
             ->add('tags')
-            ->add('save', 'submit')
-            ->add('tuneFiles', 'collection', array(
-                'type' => new TuneFileType(),
-                'options' => array('label' => false),
+            ->add('save', SubmitType::class)
+            ->add('tuneFiles', CollectionType::class, array(
+                'entry_type' => TuneFileType::class,
+                'entry_options' => array('label' => false),
                 'allow_add'    => true,
                 'by_reference' => false,
                 'allow_delete' => true,

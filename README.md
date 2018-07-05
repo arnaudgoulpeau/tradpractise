@@ -41,6 +41,10 @@ Feel free to contribute !
 - Put it under apache2.4
 - I used a MariaDB 5 for data
 
+`php composer.phar install --env=prod`
+
+`php assets:install web --env=prod`
+
 # Usage
 
 Create a folder under web : tunefiles
