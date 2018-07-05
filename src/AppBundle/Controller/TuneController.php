@@ -66,7 +66,7 @@ class TuneController extends Controller
     {
         $tune = new \AppBundle\Entity\Tune();
 
-        $form = $this->createForm(new \AppBundle\Form\TuneType(), $tune);
+        $form = $this->createForm(\AppBundle\Form\TuneType::class, $tune);
 
         $form->handleRequest($request);
 

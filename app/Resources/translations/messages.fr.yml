@@ -96,3 +96,8 @@ technique.link.example: Lien d'exemple
 all.techniques: Toutes les techniques
 
 abc.and.sheet.music: ABC et partition liée
+
+issue.name: Nom
+issue.without.partition: Sans partition
+issue.without.abc: Sans ABC
+issue.without.set: Sans Set
