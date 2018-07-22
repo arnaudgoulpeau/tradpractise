@@ -58,5 +58,10 @@ class AppKernel extends Kernel
             $container->addObjectResource($this);
         });
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+        foreach (\glob($this->getRootDir().'/config/specificImporterConfig/*.yml') as $filename) {
+            $loader->load($filename);
+        }
+
+
     }
 }

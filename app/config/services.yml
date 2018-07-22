@@ -11,6 +11,7 @@ services:
         bind:
             $rootPath: '%app.path.root_path%'
             $tuneFilesPath: '%app.path.tune_file_path%'
+            $importersConfigurations: '%importers_configurations%'
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -27,7 +28,15 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
-    # add more services, or override services that need manual wiring
-    # AppBundle\Service\ExampleService:
-    #     arguments:
-    #         $someArgument: 'some_value'
+    AppBundle\Service\ExcelTuneImport\Importer\OneWorksheetPerTypeOneTuneFileExcelImporter:
+        arguments:
+            - 'OneWorksheetPerTypeOneTuneFileExcelImporter'
+            - "@phpexcel"
+            - "@logger"
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: 'app.excel_import_handler' }
+
+    AppBundle\Service\ExcelTuneImport\ExcelImportTuneManager:
+        # inject all services tagged with app.handler as first argument
+        arguments: [!tagged app.excel_import_handler]

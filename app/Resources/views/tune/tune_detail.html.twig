@@ -18,7 +18,7 @@
                     <a target="_blank" href="{{ tuneFile.link }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ tuneFile.tuneFileType.fileName }}"> {{ tuneFile.name }}</a>
                     {% else %}
                         {% set ext = tuneFile.fileName|slice(-3, 3) %}
-                        {% if ext == 'mp3' %}
+                        {% if ext == 'mp3' or ext == 'm4a' %}
                             <div style="display: inline-block; border: 1px solid #ccc; border-radius: 5px;">{{ tuneFile.name }}<br>
                             <audio controls="controls" loop>
                                 <source src="{{ tunefilepath }}/{{ tuneFile.fileName }}" type="audio/mp3" />
