@@ -1,0 +1,24 @@
+parameters:
+    importers_configurations:
+      xavier_excel:
+          hasHeader: true
+          applyTags: ['MyTag1', 'MyTag2']
+          worksheetMapping:
+              Reel:
+                  worksheetTitle: "Reels"
+                  tuneName: "A"
+                  tuneKey: "B"
+                  tuneFileName: ["A", "D"]
+                  tuneFileLinkweb: "C"
+              Jig:
+                  worksheetTitle: "Jigs"
+                  tuneName: "A"
+                  tuneKey: "B"
+                  tuneFileName: ["A", "D"]
+                  tuneFileLinkweb: "C"
+              Strathspey:
+                  worksheetTitle: "Stathspeys"
+                  tuneName: "A"
+                  tuneKey: "B"
+                  tuneFileName: ["A", "D"]
+                  tuneFileLinkweb: "C"

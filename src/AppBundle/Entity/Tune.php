@@ -307,6 +307,19 @@ class Tune
     }
 
     /**
+     * @param array $tags
+     * @return Tune
+     */
+    public function addTags(array $tags)
+    {
+        foreach ($tags as $tag) {
+            $this->addTag($tag);
+        }
+
+        return $this;
+    }
+
+    /**
      * Remove tag
      *
      * @param \AppBundle\Entity\Tag $tag
