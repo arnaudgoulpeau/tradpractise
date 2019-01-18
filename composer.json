@@ -35,14 +35,7 @@
 		"liuggio/excelbundle": "^2.1",
 		"easycorp/easyadmin-bundle": "^1.17",
 		"twig/twig": "^1.0||^2.0",
-		"bower-asset/select2" : "^4.0",
-		"bower-asset/humane" : "^3.2",
-		"bower-asset/jquery-loading" : "^1.1",
-		"bower-asset/fontawesome" : "^4.4",
-		"bower-asset/bootstrap-switch" : "^3.3",
-		"bower-asset/jquery-ui" : "^1.11",
-		"bower-asset/seiyria-bootstrap-slider" : "^5.0",
-		"bower-asset/bootstrap" : "^3.3"
+		"symfony/webpack-encore-bundle": "^1.0"
 	},
 	"require-dev" : {
 		"sensio/generator-bundle": "^3.0",

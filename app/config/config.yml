@@ -95,3 +95,6 @@ vich_uploader:
             uri_prefix:         %app.path.tune_file_path%
             upload_destination: %app.upload.destination%
             namer:              vich_uploader.namer_uniqid
+
+webpack_encore:
+    output_path: "%kernel.root_dir%/../web/build/"
