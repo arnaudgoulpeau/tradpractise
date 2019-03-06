@@ -50,4 +50,6 @@
 /web/exportmp3/
 /web/tunefiles/
 
+/node_modules/
+
 /.idea/

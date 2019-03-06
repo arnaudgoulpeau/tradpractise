@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  php:
+    container_name: musicpractisedev
+    image: musicpractisedev
+    depends_on:
+      - mariadb
+    environment:
+      - MYSQL_USER=musicpractise
+      - MYSQL_PASSWORD=musicpractise
+    volumes:
+       - ./:/srv/app
+    ports:
+       - "8000:8000"
+
+  mariadb:
+    container_name: musicpractisedev_mariadb
+    image: mariadb:10.2
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=musicpractise
+      - MYSQL_USER=musicpractise
+      - MYSQL_PASSWORD=musicpractise
+    restart: on-failure
+    ports:
+       - "3306:3306"

@@ -22,7 +22,7 @@
                             <div style="display: inline-block; border: 1px solid #ccc; border-radius: 5px;">{{ techniqueFile.name }}<br>
                             <audio controls="controls" loop>
                                 <source src="{{ tunefilepath }}/{{ techniqueFile.fileName }}" type="audio/mp3" />
-                                <a target="_blank" href="{{ tunefilepath }}/{{ techniqueFile.fileName }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ techniqueFile.techniqueFileType.fileName }}"> {{ techniqueFile.name }}</a>
+                                <a target="_blank" href="{{ tunefilepath }}/{{ techniqueFile.fileName }}" class="btn btn-info"><img src="{{ tunefilepath }}/{{ techniqueFile.fileName }}"> {{ techniqueFile.name }}</a>
                             </audio></div>
                         {% else %}
                             <a target="_blank" href="{{ tunefilepath }}/{{ techniqueFile.fileName }}" class="btn btn-info">{{ techniqueFile.name }}</a>
