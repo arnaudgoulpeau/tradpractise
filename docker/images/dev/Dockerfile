@@ -1,6 +1,6 @@
 FROM phpbase
 
-RUN yum -y --setopt=tsflags=nodocs --nogpgcheck install openssl php72u-dbg git mysql
+RUN yum -y --setopt=tsflags=nodocs --nogpgcheck install openssl git mysql
 
 WORKDIR /srv
 
